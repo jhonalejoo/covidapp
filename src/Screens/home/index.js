@@ -7,11 +7,20 @@ import HeaderComponent from '../../Components/Header';
 import Theme from '../../Theme/Theme';
 import ButtonPrevention from '../../Components/Buttons/buttonPrevention';
 import LinearGradient from 'react-native-linear-gradient';
+import {useDispatch, useSelector} from "react-redux";
+import {getDataCovidRequesting} from "../../redux/dataCovid/actions";
 
 const HomeScreen = ({navigation}) => {
     const callAction = () => {
         Linking.openURL(`tel:${195}`);
     };
+
+    const dispatch = useDispatch();
+
+
+    useEffect(()=> {
+        dispatch(getDataCovidRequesting());
+    }, []);
 
     const prevention = [
         {
@@ -78,8 +87,8 @@ const HomeScreen = ({navigation}) => {
                     <ScrollView horizontal={true} contentContainerStyle={{marginTop: 10}}
                                 showsHorizontalScrollIndicator={false}>
                         {
-                            prevention.map((prevention) => (
-                                <View style={{width: '14%',marginHorizontal: 10}}>
+                            prevention.map((prevention, index) => (
+                                <View style={{width: '14%',marginHorizontal: 10}} key={index}>
                                     <ButtonPrevention prevention={prevention}/>
                                 </View>
                             ))

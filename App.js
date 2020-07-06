@@ -12,22 +12,24 @@ import {
   StatusBar,
 } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import { createDrawerNavigator } from '@react-navigation/drawer';
-import createSagaMiddleware from 'redux-saga'
+import createSagaMiddleware from 'redux-saga';
+import IndexSagas from "./src/redux/index-saga";
+import IndexReducer from "./src/redux/index-reducer";
 import {Provider} from "react-redux";
 import {applyMiddleware, createStore, compose} from "redux";
-import {DrawerComponent} from './src/Components/Drawer';
-import HomeScreen from './src/Screens/home';
 import TabBottomComponent from './src/Components/TabBottom';
 import Theme from './src/Theme/Theme';
-const Drawer = createDrawerNavigator();
-const composeSetup = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
+const composeSetup = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const sagaMiddleware = createSagaMiddleware();
 
 
 const store = createStore(
-    composeSetup(applyMiddleware()),
+    IndexReducer,
+    composeSetup(applyMiddleware(sagaMiddleware)),
 );
+
+sagaMiddleware.run(IndexSagas);
 
 const App: () => React$Node = () => {
   return (
