@@ -27,7 +27,7 @@ const LoginScreen = (props) => {
                     <ButtonLogin  title={'Iniciar sesion'}/>
                     <View style={{flexDirection: 'row',alignSelf:'center'}}>
                         <Text style={{marginVertical:hp(2)}}>No tienes cuenta </Text>
-                        <TouchableOpacity>
+                        <TouchableOpacity onPress={()=>props.navigation.navigate('Register')}>
                             <Text style={{marginVertical:hp(2),color:Theme.COLORS.PRIMARY,fontWeight:'bold'}}>registrate</Text>
                         </TouchableOpacity>
                     </View>

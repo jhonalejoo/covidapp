@@ -11,6 +11,10 @@ const StackNavigation =()=>{
   return(
       <Stack.Navigator headerMode={'none'}>
           <Stack.Screen
+              name="Drawer"
+              component={DrawerComponent}
+          />
+          <Stack.Screen
               name="Login"
               component={LoginScreen}
           />
@@ -18,10 +22,7 @@ const StackNavigation =()=>{
               name="Register"
               component={RegisterScreen}
           />
-          <Stack.Screen
-              name="Drawer"
-              component={DrawerComponent}
-          />
+
       </Stack.Navigator>
   )
 };

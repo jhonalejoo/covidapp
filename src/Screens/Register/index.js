@@ -1,10 +1,11 @@
 import React,{useEffect,useState,} from 'react';
-import {Image, ImageBackground, Text, View} from 'react-native';
+import {Image, ImageBackground, Text, TouchableOpacity, View} from 'react-native';
 import styles from "./styles";
 import { Input } from 'react-native-elements';
 import ButtonLogin from '../../Components/Buttons/ButtonLogin';
 import {heightPercentageToDP as hp,widthPercentageToDP as wp} from 'react-native-responsive-screen';
-import RNPickerSelect from 'react-native-picker-select';
+import DropDownPicker from 'react-native-dropdown-picker';
+import Theme from '../../Theme/Theme';
 
 
 const RegisterScreen = (props) => {
@@ -23,11 +24,27 @@ const RegisterScreen = (props) => {
                 <Input
                     placeholder='Correo'
                 />
-                <Input
-                    placeholder='Eps'
-                />
                 <Input placeholder="Password" secureTextEntry={true} />
+                <DropDownPicker
+                    items={[
+                        {label: 'Nueva Eps', value: 'uk'},
+                        {label: 'Sura', value: 'france'},
+                    ]}
+                    placeholder={'Seleccione un eps'}
+                    containerStyle={{height: hp(8),marginBottom:20}}
+                    style={{backgroundColor: '#fafafa'}}
+                    itemStyle={{
+                        justifyContent: 'flex-start'
+                    }}
+                    dropDownStyle={{backgroundColor: '#fafafa'}}
+                />
                 <ButtonLogin  title={'Registrar'}/>
+                <View style={{flexDirection: 'row',alignSelf:'center'}}>
+                    <Text style={{marginVertical:hp(2)}}>Tienes cuenta </Text>
+                    <TouchableOpacity onPress={()=>props.navigation.navigate('Login')}>
+                        <Text style={{marginVertical:hp(2),color:Theme.COLORS.PRIMARY,fontWeight:'bold'}}>Iniciar sesion</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
         </ImageBackground>
     )
