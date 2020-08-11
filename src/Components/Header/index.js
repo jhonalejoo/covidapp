@@ -13,7 +13,7 @@ const HeaderComponent= props => {
 
             }}
             leftComponent={
-                <TouchableOpacity>
+                <TouchableOpacity onPress={()=>props.navigation.openDrawer()}>
                     <Icon
                         name={'menu'}
                         color={Theme.COLORS.WHITE}

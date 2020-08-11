@@ -17,8 +17,8 @@ import IndexSagas from "./src/redux/index-saga";
 import IndexReducer from "./src/redux/index-reducer";
 import {Provider} from "react-redux";
 import {applyMiddleware, createStore, compose} from "redux";
-import TabBottomComponent from './src/Components/TabBottom';
 import Theme from './src/Theme/Theme';
+import StackNavigation from './src/Components/Navigation';
 
 const composeSetup = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const sagaMiddleware = createSagaMiddleware();
@@ -37,7 +37,7 @@ const App: () => React$Node = () => {
       <StatusBar backgroundColor={Theme.COLORS.PRIMARY}/>
       <SafeAreaView style={{flex:1}}>
         <NavigationContainer>
-          <TabBottomComponent/>
+            <StackNavigation/>
         </NavigationContainer>
       </SafeAreaView>
     </Provider>

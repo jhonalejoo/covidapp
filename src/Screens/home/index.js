@@ -9,6 +9,7 @@ import ButtonPrevention from '../../Components/Buttons/buttonPrevention';
 import LinearGradient from 'react-native-linear-gradient';
 import {useDispatch, useSelector} from "react-redux";
 import {getDataCovidRequesting} from "../../redux/dataCovid/actions";
+import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen';
 
 const HomeScreen = ({navigation}) => {
     const callAction = () => {
@@ -58,19 +59,19 @@ const HomeScreen = ({navigation}) => {
                 borderBottomLeftRadius: 35,
                 borderBottomRightRadius: 35,
             }}>
-                <View style={{marginHorizontal: 20}}>
-                    <Text style={{color: Theme.COLORS.WHITE, fontWeight: 'bold', fontSize: 22}}>
+                <View style={{marginHorizontal: wp(5)}}>
+                    <Text style={{color: Theme.COLORS.WHITE, fontWeight: 'bold', fontSize: wp(5.5)}}>
                         Covid-19
                     </Text>
-                    <Text style={{color: Theme.COLORS.WHITE, fontWeight: 'bold', fontSize: 20, marginTop: 20}}>
+                    <Text style={{color: Theme.COLORS.WHITE, fontWeight: 'bold', fontSize: wp(5), marginTop: hp(3)}}>
                         ¿Te sientes enfermo?
                     </Text>
-                    <Text style={{color: Theme.COLORS.WHITE, fontSize: 14, marginTop: 10,textAlign:'justify'}}>
+                    <Text style={{color: Theme.COLORS.WHITE, fontSize: 14, marginTop: hp(2),textAlign:'justify'}}>
                         Si te sientes enfermo con cualquiera de los sintomas del covid-19, llame de inmediato para
                         obtener ayuda.
 
                     </Text>
-                    <View style={{width: '50%', marginTop: 15}}>
+                    <View style={{width: wp(45), marginTop: 15}}>
                         <ButtonCall title='Llamar' action={callAction} color={Theme.COLORS.RED}/>
                     </View>
                 </View>
@@ -84,7 +85,7 @@ const HomeScreen = ({navigation}) => {
                         fontSize: 22,
                         fontWeight: 'bold',
                     }}>Prevención</Text>
-                    <ScrollView horizontal={true} contentContainerStyle={{marginTop: 10}}
+                    <ScrollView horizontal={true} contentContainerStyle={{marginTop: wp(2)}}
                                 showsHorizontalScrollIndicator={false}>
                         {
                             prevention.map((prevention, index) => (
@@ -96,7 +97,7 @@ const HomeScreen = ({navigation}) => {
 
                     </ScrollView>
                     </View>
-                    <View style={{height:'50%'}}>
+                    <View style={{height:hp(33)}}>
                     <TouchableOpacity>
                         <LinearGradient
                             start={{x: 0, y: 0}} end={{x: 1, y: 0}}
