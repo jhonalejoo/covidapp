@@ -41,7 +41,7 @@ const DrawerContent=(props)=>{
                         )}
                         label={"Inicio"}
                         labelStyle={{color:Theme.COLORS.PRIMARY}}
-                        onPress={() => {props.navigation.navigate('Home')}}
+                        onPress={() => {props.navigation.navigate('HomeScreen')}}
                     />
                     <DrawerItem
                         inactiveTintColor={'#3D6DCC'}

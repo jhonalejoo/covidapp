@@ -2,24 +2,18 @@ import {call, put, all, takeEvery} from 'redux-saga/effects';
 import {getDataCovidError, getDataCovidSuccess} from "./actions";
 import {GET_DATA_COVID_REQUESTING} from "./constants";
 
-const URL = 'https://www.datos.gov.co/resource/gt2j-8ykr.json';
+const URL = 'http://api.covid19api.com/summary';
 
 const dataCovidAPI = () => {
 
     return fetch(URL, {
         method: 'GET',
-        headers: {
-            'Content-Type' : 'application/json',
-        },
-        data: {
-            "limit" : 5000,
-            "app_token" : '20w1iezihvv4uhmaoxuzzcf1w'
-        }
+        redirect: 'follow'
     })
         .then(response => response.json())
-        .then(json => {
-            console.log(json, 'mmmm');
-            throw json;
+        .then(result => {
+            let data=result.hasOwnProperty('Countries') ?result.Countries.find((country => country.Country==='Colombia')) : {};
+            return  data;
         }).catch((error) => {
             console.log(error, 'wwwww');
             throw error;
