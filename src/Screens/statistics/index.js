@@ -15,7 +15,7 @@ const StatisticsScreen = ({navigation}) => {
     const data    = [ 50, 10, 40, 95, 4, 24, 85, 91, 35, 53, 53, 24, 50, 20, 80 ];
     const buttons = ['Total', 'Hoy', 'Ayer'];
     const [index,setIndex] = useState(0);
-    const AllData=useSelector(state=>state. dataCovid);
+    const AllData= useSelector(state=>state. dataCovid);
     const covidData=AllData.data;
     const updateIndex =(index)=>{
         setIndex(index)
@@ -39,16 +39,16 @@ const StatisticsScreen = ({navigation}) => {
                 justifyContent:'space-around'
             }}>
                 <View style={{flexDirection: 'row',height:'25%',justifyContent:'space-between',marginHorizontal:20}}>
-                    <ButtonStatics width={'47%'}  number={covidData.hasOwnProperty('TotalConfirmed')? covidData.TotalConfirmed: 0} statistic='Infectados' color={Theme.COLORS.YELLOW} />
-                    <ButtonStatics width={'47%'}  number={covidData.hasOwnProperty('TotalDeaths')? covidData.TotalDeaths: 0} statistic='Muertos' color={Theme.COLORS.RED} />
+                    <ButtonStatics width={'47%'}  number={AllData.infected.length} statistic='Infectados' color={Theme.COLORS.YELLOW} />
+                    <ButtonStatics width={'47%'}  number={AllData.death.length} statistic='Muertos' color={Theme.COLORS.RED} />
                 </View>
                 <View style={{flexDirection: 'row',height:'25%',justifyContent:'space-between',marginHorizontal:20}}>
-                    <ButtonStatics width={'47%'} number={covidData.hasOwnProperty('TotalRecovered')? covidData.TotalRecovered: 0} statistic='Recuperados' color={Theme.COLORS.GREEN} />
-                    <ButtonStatics width={'47%'} number={covidData.hasOwnProperty('NewRecovered')? covidData.NewRecovered: 0} statistic='Nuevas Recuperados' color={Theme.COLORS.PURPLE} />
+                    <ButtonStatics width={'47%'} number={AllData.recovered.length} statistic='Recuperados' color={Theme.COLORS.GREEN} />
+                    <ButtonStatics width={'47%'} number={1} statistic='Nuevas Recuperados' color={Theme.COLORS.PURPLE} />
                 </View>
                 <View style={{flexDirection: 'row',height:'25%',justifyContent:'space-between',marginHorizontal:20}}>
-                    <ButtonStatics width={'47%'} number={covidData.hasOwnProperty('NewDeaths')? covidData.NewDeaths: 0} statistic='Nuevas Muertes' color={Theme.COLORS.BLUE} />
-                    <ButtonStatics width={'47%'} number={covidData.hasOwnProperty('NewDeaths')? covidData.NewConfirmed: 0} statistic='Nuevos Infectados' color={Theme.COLORS.BLUE} />
+                    <ButtonStatics width={'47%'} number={1} statistic='Nuevas Muertes' color={Theme.COLORS.BLUE} />
+                    <ButtonStatics width={'47%'} number={1} statistic='Nuevos Infectados' color={Theme.COLORS.BLUE} />
                 </View>
             </View>
            {/* <View style={{

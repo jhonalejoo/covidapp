@@ -4,7 +4,9 @@ const initialState = {
     requesting: false,
     success: false,
     error: '',
-    data: {}
+    infected: {},
+    death: {},
+    recovered: {}
 };
 
 const reducer = (state = initialState, action) => {
@@ -15,11 +17,16 @@ const reducer = (state = initialState, action) => {
                 requesting: true
             };
         case GET_DATA_COVID_SUCCESS:
+            let covid = action.data.filter(covid => covid.ciudad_de_ubicaci_n === 'Bogotá D.C.');
+            let deathCovid = covid.filter(covid => covid.atenci_n === 'Fallecido');
+            let recoveredCovid = covid.filter(covid => covid.atenci_n === 'Recuperado')
             return {
                 ...state,
                 requesting: false,
                 success: true,
-                data: action.data
+                infected: covid,
+                death: deathCovid,
+                recovered: recoveredCovid
             };
         case GET_DATA_COVID_ERROR:
             return {
