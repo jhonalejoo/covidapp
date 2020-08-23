@@ -2,6 +2,7 @@ import * as React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import HomeScreen from '../../Screens/home';
 import StatisticsScreen from '../../Screens/statistics';
+import GraphicsScreen from "../../Screens/Graphics";
 import MapScreen from '../../Screens/Map';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Theme from '../../Theme/Theme';
@@ -26,6 +27,9 @@ const TabBottomComponent =()=>{
                             break;
                         case  "Map":
                             iconName="map";
+                            break;
+                        case  "Graphics":
+                            iconName="chart-donut";
                             break;
                         default:
                             break;
@@ -55,6 +59,14 @@ const TabBottomComponent =()=>{
             <Tab.Screen
                 name="Statistics"
                 component={StatisticsScreen}
+
+                options={{
+                    title:''
+                }}
+            />
+            <Tab.Screen
+                name="Graphics"
+                component={GraphicsScreen}
 
                 options={{
                     title:''
