@@ -1,0 +1,3 @@
+export const GET_EPS_REQUESTING = 'GET_EPS_REQUESTING';
+export const GET_EPS_SUCCESS = 'GET_EPS_SUCCESS';
+export const GET_EPS_ERROR = 'GET_EPS_ERROR';

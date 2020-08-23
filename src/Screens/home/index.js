@@ -10,6 +10,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import {useDispatch, useSelector} from "react-redux";
 import {getDataCovidRequesting} from "../../redux/dataCovid/actions";
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen';
+import {getEpsRequesting} from "../../redux/eps/actions";
 
 const HomeScreen = ({navigation}) => {
     const callAction = () => {
@@ -21,6 +22,7 @@ const HomeScreen = ({navigation}) => {
 
     useEffect(()=> {
         dispatch(getDataCovidRequesting());
+        dispatch(getEpsRequesting());
     }, []);
 
     const prevention = [

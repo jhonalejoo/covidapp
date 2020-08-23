@@ -4,9 +4,6 @@ import {GET_DATA_COVID_REQUESTING} from "./constants";
 import {ROUTE_ENDPOINT} from "../../utils/env";
 
 const dataCovidAPI = () => {
-
-
-
     return fetch(`${ROUTE_ENDPOINT}covid/dataCovid`, {
         method: 'GET',
         headers: {
