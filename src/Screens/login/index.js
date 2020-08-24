@@ -5,9 +5,23 @@ import { Input} from 'react-native-elements';
 import ButtonLogin from '../../Components/Buttons/ButtonLogin';
 import {heightPercentageToDP as hp,widthPercentageToDP as wp} from 'react-native-responsive-screen';
 import Theme from '../../Theme/Theme';
-
+import {loginUserRequesting} from "../../redux/user/actions";
+import {useDispatch} from "react-redux";
 
 const LoginScreen = (props) => {
+
+    const [emailLogin, setEmailLogin] = useState('');
+    const [passwordLogin, setPasswordLogin] = useState('');
+    const dispatch = useDispatch();
+
+    const createUser = () => {
+        let values = {
+            email: emailLogin,
+            password: passwordLogin
+        };
+        dispatch(loginUserRequesting(values));
+    };
+
     return(
             <ImageBackground   resizeMode="repeat"
                                style={styles.container}
@@ -21,10 +35,13 @@ const LoginScreen = (props) => {
                          <Text style={{marginVertical:hp(2),textAlign:'center',fontSize:wp(6),fontWeight:'bold'}}>Covid App</Text>
                     </View>
                     <Input
+                        onChangeText={(text) => setEmailLogin(text)}
                         placeholder='Correo'
                     />
-                    <Input placeholder="Password" secureTextEntry={true} />
-                    <ButtonLogin  title={'Iniciar sesion'}/>
+                    <Input placeholder="Password" secureTextEntry={true}
+                        onChangeText={(text) => setPasswordLogin(text)}
+                    />
+                    <ButtonLogin  title={'Iniciar sesion'} action={() => createUser()}/>
                     <View style={{flexDirection: 'row',alignSelf:'center'}}>
                         <Text style={{marginVertical:hp(2)}}>No tienes cuenta </Text>
                         <TouchableOpacity onPress={()=>props.navigation.navigate('Register')}>
