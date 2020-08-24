@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {View, Linking, ScrollView, TouchableOpacity,Image} from 'react-native';
+import {View, Linking, ScrollView, TouchableOpacity,Image, AsyncStorage} from 'react-native';
 import styles from './styles';
 import ButtonCall from '../../Components/Buttons/buttonCall';
 import {Text} from 'react-native-elements';
@@ -11,10 +11,21 @@ import {useDispatch, useSelector} from "react-redux";
 import {getDataCovidRequesting} from "../../redux/dataCovid/actions";
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen';
 import {getEpsRequesting} from "../../redux/eps/actions";
+import {getToken, meRequesting} from "../../redux/user/actions";
+import Modal, { ModalContent, ModalTitle } from 'react-native-modals';
+import DiagnosisComponent from "../../Components/Diagnosis";
 
 const HomeScreen = ({navigation}) => {
+
+    const userProfile = useSelector(state => state.user);
+    const [openDiagnosis, setModalOpenDiagnosis] = useState(false);
+    const {user} = userProfile;
     const callAction = () => {
-        Linking.openURL(`tel:${195}`);
+        {Object.keys(user).length > 0 ?
+            Linking.openURL(`tel:${user.eps.telefono}`)
+        :
+            Linking.openURL(`tel:${195}`)
+        }
     };
 
     const dispatch = useDispatch();
@@ -23,6 +34,16 @@ const HomeScreen = ({navigation}) => {
     useEffect(()=> {
         dispatch(getDataCovidRequesting());
         dispatch(getEpsRequesting());
+    }, []);
+
+    useEffect(() => {
+        AsyncStorage.getItem('@app:covidapp').then(token => {
+            if(token !== null){
+                dispatch(meRequesting(token));
+                dispatch(getToken(token));
+            }
+
+        });
     }, []);
 
     const prevention = [
@@ -100,7 +121,7 @@ const HomeScreen = ({navigation}) => {
                     </ScrollView>
                     </View>
                     <View style={{height:hp(33)}}>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={() => setModalOpenDiagnosis(true)}>
                         <LinearGradient
                             start={{x: 0, y: 0}} end={{x: 1, y: 0}}
                             colors={['rgba(100,91,233,0.69)', Theme.COLORS.PRIMARY]}
@@ -125,6 +146,22 @@ const HomeScreen = ({navigation}) => {
                     </TouchableOpacity>
                     </View>
                 </ScrollView>
+                <Modal visible={openDiagnosis}
+                       onTouchOutside={() => {setModalOpenDiagnosis(false)}}
+                       onHardwareBackPress={() => {
+                           setModalOpenDiagnosis(false);
+                           return true;
+                       }}
+                       width={0.8}
+                       height={0.8}
+                       modalTitle={<ModalTitle title="Tiene alguno de estos síntomas" textStyle={{fontSize: hp(2)}}/>}
+                >
+                    <ModalContent>
+                        <DiagnosisComponent
+
+                        />
+                    </ModalContent>
+                </Modal>
             </View>
         </View>
     );

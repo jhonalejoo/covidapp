@@ -19,7 +19,7 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 requesting: false,
                 success: true,
-                eps: state.eps
+                eps: action.eps
             };
         case GET_EPS_ERROR:
             return {

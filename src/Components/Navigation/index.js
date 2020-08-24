@@ -3,6 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import RegisterScreen from '../../Screens/Register';
 import DrawerComponent from '../Drawer';
 import LoginScreen from '../../Screens/login';
+import ProfileScreen from "../../Screens/profile";
 const Stack = createStackNavigator();
 
 
@@ -20,6 +21,10 @@ const StackNavigation =()=>{
           <Stack.Screen
               name="Register"
               component={RegisterScreen}
+          />
+          <Stack.Screen
+              name="Profile"
+              component={ProfileScreen}
           />
 
       </Stack.Navigator>
