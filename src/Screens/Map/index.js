@@ -10,7 +10,9 @@ const MapScreen = ({navigation}) => {
     return(
         <View style={styles.page}>
             <View style={styles.container}>
-                <MapboxGL.MapView style={styles.map}>
+                <MapboxGL.MapView
+                    onLongPress={(e)=>console.log(e)}
+                    style={styles.map}>
                 </MapboxGL.MapView>
             </View>
         </View>
