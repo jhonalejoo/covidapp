@@ -19,6 +19,28 @@ const data = {
     ],
     legend: ["Curva contagio"]
 };
+const dataUci = {
+    labels: ["Marzo", "Abril", "Mayo", "Junio","Julio","Agosto"],
+    datasets: [
+        {
+            data: [0, 30, 68, 80, 90, 76],
+            color: (opacity = 1) => `rgba(134, 65, 244, ${opacity})`, // optional
+            strokeWidth: 1.5
+        }
+    ],
+    legend: ["Porcentaje Uci"]
+};
+const dataMuestras = {
+    labels: ["Marzo", "Abril", "Mayo", "Junio","Julio","Agosto"],
+    datasets: [
+        {
+            data: [0, 40, 101, 220, 499, 789],
+            color: (opacity = 1) => `rgba(134, 65, 244, ${opacity})`, // optional
+            strokeWidth: 1.5
+        }
+    ],
+    legend: ["Muestras procesadas"]
+};
 
 
 const chartConfig = {
@@ -33,10 +55,10 @@ const chartConfig = {
 };
 
 const screenWidth = Dimensions.get("window").width;
-const GraphComponent =()=>{
+const GraphComponent =(props)=>{
     return(
         <LineChart
-            data={data}
+            data={props.data}
             width={screenWidth}
             height={hp(40)}
             verticalLabelRotation={30}
@@ -48,13 +70,18 @@ const GraphComponent =()=>{
 
 const FirstRoute = () => (
     <View style={[styles.scene,{backgroundColor:'#43307a',alignItems:'center',justifyContent:'center'}]} >
-        <GraphComponent/>
+        <GraphComponent data={data}/>
     </View>
 );
 
 const SecondRoute = () => (
     <View style={[styles.scene,{backgroundColor:'#43307a',alignItems:'center',justifyContent:'center'}]} >
-        <GraphComponent/>
+        <GraphComponent data={dataUci}/>
+    </View>
+);
+const ThirdRoute = () => (
+    <View style={[styles.scene,{backgroundColor:'#43307a',alignItems:'center',justifyContent:'center'}]} >
+        <GraphComponent data={dataMuestras}/>
     </View>
 );
 
@@ -76,11 +103,13 @@ const GraphicsScreen = ({navigation}) => {
     const [routes] = useState([
         { key: 'first', title: 'Contagio' },
         { key: 'second', title: 'Ucis' },
+        { key: 'third', title: 'Muestras procesadas' },
     ]);
 
     const renderScene = SceneMap({
         first: FirstRoute,
         second: SecondRoute,
+        third: ThirdRoute
     });
 
     return (
