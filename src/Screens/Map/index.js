@@ -10,9 +10,11 @@ const MapScreen = ({navigation}) => {
     return(
         <View style={styles.page}>
             <View style={styles.container}>
-                <MapboxGL.MapView
-                    onLongPress={(e)=>console.log(e)}
-                    style={styles.map}>
+                <MapboxGL.MapView style={styles.map}>
+                    <MapboxGL.Camera
+                        zoomLevel={12}
+                        centerCoordinate={[-74.126855, 4.705246]}
+                    />
                 </MapboxGL.MapView>
             </View>
         </View>

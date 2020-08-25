@@ -17,9 +17,10 @@ const diagnoses = [
 ];
 const DiagnosisComponent = props => {
     const [checkBox, setCheckBox] = useState([]);
-  /*  let diagnosesCheckBox = [];
-    diagnosesCheckBox.push(checkBox);
-    console.log(diagnosesCheckBox);*/
+    let diagnosesCheckBox = [];
+   // diagnosesCheckBox.push(checkBox);
+    console.log(diagnosesCheckBox);
+   // console.log(diagnosesCheckBox);
     return (
         <View>
             <ScrollView >
@@ -29,9 +30,9 @@ const DiagnosisComponent = props => {
                         containerStyle={styles.containerCheckbox}
                         title={diagnosis.text}
                         checked={false}
-                       /* onPress={() => {
-                            setCheckBox({value: diagnosis.value});
-                        }}*/
+                        onPress={() => {
+                            diagnosesCheckBox.push(diagnosis.value);
+                        }}
                     />
                 ))}
             </ScrollView>
